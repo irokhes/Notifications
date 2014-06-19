@@ -1,6 +1,8 @@
 
 var http = require('http');
-
+var ip = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1',
+    port = process.env.OPENSHIFT_NODEJS_PORT || '8080';
+	
 var express = require('express');
 
 var app = express();
@@ -23,8 +25,8 @@ app.post('/msg', function(req, res) {
 });
 
  //Start App
-server = http.createServer(app).listen(3500, function(){
-    console.log('Express server listening on port ' + 3500);
+server = http.createServer(app).listen(port, ip, function(){
+    console.log('Express server running at http://'+ip+':'+port+'/');
 });
 
 module.exports = app;
